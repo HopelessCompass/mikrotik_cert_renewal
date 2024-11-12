@@ -1,0 +1,14 @@
+/ip firewall filter enable [find where comment="acme-challenge"]
+
+:local domainName "доменное_имя"
+
+/certificate renew [/certificate find where common-name=$domainName]
+
+:local certName [/certificate find where common-name=$domainName]
+:if ([:len $certName] > 0) do={
+/interface sstp-server server set certificate=$certName
+}
+
+:delay 15s
+
+/ip firewall filter disable [find where comment="acme-challenge"]
