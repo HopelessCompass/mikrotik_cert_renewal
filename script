@@ -1,6 +1,7 @@
 /ip firewall filter enable [find where comment="acme-challenge"]
 
 :local domainName "доменное_имя"
+:local certName "имя_сертификата"
 
 /certificate renew [/certificate find where common-name=$domainName]
 
